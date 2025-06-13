@@ -14,9 +14,22 @@ public class Player : MonoBehaviour
     {
         
     }
+    void Update()
+    {
+        HandleInteraction();
+    }
 
     private void FixedUpdate()
     {
+        HandleMovement();
+    }
+    public bool IsWalking
+    {
+        get { return isWalking; }
+    }
+    private void HandleMovement()
+    {
+        // 处理移动逻辑
         Vector3 direction = gameInput.GetMovementDirectionNormalized();
 
         isWalking = direction != Vector3.zero;
@@ -28,9 +41,16 @@ public class Player : MonoBehaviour
 
         }
     }
-
-    public bool IsWalking
+    private void HandleInteraction()
     {
-        get { return isWalking; }
+        // 处理交互逻辑
+        RaycastHit hitinfo;
+        bool isCollider = Physics.Raycast(transform.position, transform.forward, out hitinfo, 2f);
+        if (isCollider)
+        {
+            hitinfo.transform.GetComponent<ClearCounter>().Interact();
+            print(hitinfo.collider.gameObject);
+        }
+
     }
 }
