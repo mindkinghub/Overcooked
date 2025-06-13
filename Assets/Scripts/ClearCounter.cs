@@ -5,20 +5,20 @@ using UnityEngine;
 
 public class ClearCounter : BaseCounter
 {
-    [SerializeField] private GameObject selectedCounter;
     [SerializeField] private KitchenObjectSO kitchenObjectSO;
-    [SerializeField] private bool testing = false;
-    [SerializeField] private ClearCounter transferTargetCounter;
 
-    private void Update()
-    {
-        if(testing && Input.GetMouseButtonDown(0))
-        {
-            TransferKitchenObject(this, transferTargetCounter);
-        }
-    }
+    // 以下代码用于测试食材转移
+    //[SerializeField] private bool testing = false;
+    //[SerializeField] private ClearCounter transferTargetCounter;
+    //private void Update()
+    //{
+    //    if(testing && Input.GetMouseButtonDown(0))
+    //    {
+    //        TransferKitchenObject(this, transferTargetCounter);
+    //    }
+    //}
 
-    public void Interact()
+    public override void Interact(Player player)
     {
         if (GetKitchenObject() == null)
         {
@@ -27,17 +27,9 @@ public class ClearCounter : BaseCounter
         }
         else
         {
-            TransferKitchenObject(this, Player.Instance);
+            TransferKitchenObject(this, player);
         }
 
-    }
-    public void SelectCounter()
-    {
-        selectedCounter.SetActive(true);
-    }
-    public void CancelSelect()
-    {
-        selectedCounter.SetActive(false);
-    }                                                          
+    }                                                     
 
 }

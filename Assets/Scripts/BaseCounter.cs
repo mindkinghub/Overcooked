@@ -4,15 +4,18 @@ using UnityEngine;
 
 public class BaseCounter : KitchenObjectHolder
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] private GameObject selectedCounter;
+    public virtual void Interact(Player player)
     {
-        
+        Debug.LogWarning("交互方法还没重写");
     }
 
-    // Update is called once per frame
-    void Update()
+    public void SelectCounter()
     {
-        
+        selectedCounter.SetActive(true);
+    }
+    public void CancelSelect()
+    {
+        selectedCounter.SetActive(false);
     }
 }

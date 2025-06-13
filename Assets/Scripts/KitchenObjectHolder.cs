@@ -25,12 +25,12 @@ public class KitchenObjectHolder : MonoBehaviour
     {
         if (soureHolder.GetKitchenObject() == null)
         {
-            Debug.LogWarning("源无食材");
+            Debug.LogWarning("婧愭棤椋熸潗");
             return;
         }
         if (targetHolder.GetKitchenObject() != null)
         {
-            Debug.LogWarning("目标柜台已有食材");
+            Debug.LogWarning("鐩爣鏌滃彴宸叉湁椋熸潗");
             return;
         }
         targetHolder.AddKitchenObject(soureHolder.GetKitchenObject());
