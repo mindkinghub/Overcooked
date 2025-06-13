@@ -53,9 +53,4 @@ public class NewBehaviourScript : MonoBehaviour
             Debug.Log($"New recipe ordered: {newRecipe.name}");
         }
     }
-
-    public void DeliveryRecipe(PlateKitchenObject plateKitchenObject)
-    {
-        
-    }
 }
