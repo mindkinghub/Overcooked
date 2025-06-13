@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class Player : MonoBehaviour
+public class Player : KitchenObjectHolder
 {
+    public static Player Instance { get; private set; }
+
     [SerializeField] private float moveSpeed = 7;
     [SerializeField] private float rotateSpeed = 100;
     [SerializeField] private GameInput gameInput;
@@ -13,6 +15,10 @@ public class Player : MonoBehaviour
     private bool isWalking = false;     // 正在行走
     private ClearCounter seletedCounter;
 
+    private void Awake()
+    {
+        Instance = this;
+    }
     private void Start()
     {
         gameInput.OnInteractAction += GameInput_OnInteractAction;

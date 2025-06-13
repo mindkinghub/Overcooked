@@ -3,15 +3,12 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
-public class ClearCounter : MonoBehaviour
+public class ClearCounter : BaseCounter
 {
     [SerializeField] private GameObject selectedCounter;
     [SerializeField] private KitchenObjectSO kitchenObjectSO;
-    [SerializeField] private Transform topPoint;
     [SerializeField] private bool testing = false;
     [SerializeField] private ClearCounter transferTargetCounter;
-
-    private KitchenObject kitchenObject;
 
     private void Update()
     {
@@ -23,15 +20,14 @@ public class ClearCounter : MonoBehaviour
 
     public void Interact()
     {
-        if (kitchenObject == null)
+        if (GetKitchenObject() == null)
         {
-            kitchenObject = GameObject.Instantiate(kitchenObjectSO.prefab, topPoint).GetComponent<KitchenObject>();
-            kitchenObject.transform.localPosition = Vector3.zero;
+            KitchenObject kitchenObject = GameObject.Instantiate(kitchenObjectSO.prefab, GetHoldPoint()).GetComponent<KitchenObject>();
+            SetKitchenObject(kitchenObject);
         }
         else
         {
-            Debug.LogWarning(gameObject.name+"已有食材");
-
+            TransferKitchenObject(this, Player.Instance);
         }
 
     }
@@ -44,34 +40,4 @@ public class ClearCounter : MonoBehaviour
         selectedCounter.SetActive(false);
     }                                                          
 
-    public KitchenObject GetKitchenObject()
-    {
-        return kitchenObject;
-    }
-
-    public void TransferKitchenObject(ClearCounter soureCounter, ClearCounter targetCounter)
-    {
-        if (soureCounter.GetKitchenObject() == null)
-        {
-            Debug.LogWarning("源柜台无食材");
-            return;
-        }
-        if (targetCounter.GetKitchenObject() != null)
-        {
-            Debug.LogWarning("目标柜台已有食材");
-            return;
-        }
-        targetCounter.AddKitchenObject(soureCounter.GetKitchenObject());
-        soureCounter.ClearKitchenObject();
-    }
-    public void AddKitchenObject(KitchenObject kitchenObject)
-    {
-        kitchenObject.transform.SetParent(topPoint);
-        kitchenObject.transform.localPosition = Vector3.zero;
-        this.kitchenObject = kitchenObject;
-    }
-    public void ClearKitchenObject()
-    {
-        this.kitchenObject = null;
-    }
 }
