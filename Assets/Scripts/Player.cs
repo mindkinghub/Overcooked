@@ -6,14 +6,18 @@ using UnityEngine.UIElements;
 public class Player : MonoBehaviour
 {
     [SerializeField] private float moveSpeed = 7;
-    [SerializeField] private float rotateSpeed = 10;
+    [SerializeField] private float rotateSpeed = 100;
     [SerializeField] private GameInput gameInput;
-    private bool isWalking = false;
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] private LayerMask counterLayerMask;  // 指定只与Counter层发生碰撞
+
+    private bool isWalking = false;     // 正在行走
+    private ClearCounter seletedCounter;
+
+    private void Start()
     {
-        
+        gameInput.OnInteractAction += GameInput_OnInteractAction;
     }
+
     void Update()
     {
         HandleInteraction();
@@ -27,6 +31,12 @@ public class Player : MonoBehaviour
     {
         get { return isWalking; }
     }
+
+    private void GameInput_OnInteractAction(object sender, System.EventArgs e)
+    {
+        seletedCounter?.Interact();
+    }
+
     private void HandleMovement()
     {
         // 处理移动逻辑
@@ -44,13 +54,31 @@ public class Player : MonoBehaviour
     private void HandleInteraction()
     {
         // 处理交互逻辑
-        RaycastHit hitinfo;
-        bool isCollider = Physics.Raycast(transform.position, transform.forward, out hitinfo, 2f);
-        if (isCollider)
+        if (Physics.Raycast(transform.position, transform.forward, out RaycastHit hitinfo, 2f, counterLayerMask))
         {
-            hitinfo.transform.GetComponent<ClearCounter>().Interact();
-            print(hitinfo.collider.gameObject);
+            if(hitinfo.transform.TryGetComponent<ClearCounter>(out ClearCounter counter))
+            {
+                SetSelectedCounter(counter);
+            }
+            else
+            {
+                SetSelectedCounter(null);
+            }
+        }
+        else
+        {
+            SetSelectedCounter(null);
         }
 
+
+    }
+    public void SetSelectedCounter(ClearCounter counter)
+    {
+        if(counter != seletedCounter)
+        {
+            seletedCounter?.CancelSelect();
+            counter?.SelectCounter();
+        }
+        this.seletedCounter = counter;
     }
 }

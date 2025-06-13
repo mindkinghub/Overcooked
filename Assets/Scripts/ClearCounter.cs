@@ -30,7 +30,7 @@ public class ClearCounter : MonoBehaviour
         }
         else
         {
-            Debug.LogWarning("已有食材"+gameObject);
+            Debug.LogWarning(gameObject.name+"已有食材");
 
         }
 
@@ -42,7 +42,7 @@ public class ClearCounter : MonoBehaviour
     public void CancelSelect()
     {
         selectedCounter.SetActive(false);
-    }
+    }                                                          
 
     public KitchenObject GetKitchenObject()
     {
