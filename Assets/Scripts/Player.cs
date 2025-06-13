@@ -8,9 +8,9 @@ public class Player : MonoBehaviour
     [SerializeField] private float moveSpeed = 7;
     [SerializeField] private float rotateSpeed = 100;
     [SerializeField] private GameInput gameInput;
-    [SerializeField] private LayerMask counterLayerMask;  // ָ��ֻ��Counter�㷢����ײ
+    [SerializeField] private LayerMask counterLayerMask;
 
-    private bool isWalking = false;     // ��������
+    private bool isWalking = false;
     private ClearCounter seletedCounter;
 
     private void Start()
@@ -52,7 +52,6 @@ public class Player : MonoBehaviour
     }
     private void HandleInteraction()
     {
-        // ���������߼�
         if (Physics.Raycast(transform.position, transform.forward, out RaycastHit hitinfo, 2f, counterLayerMask))
         {
             if(hitinfo.transform.TryGetComponent<ClearCounter>(out ClearCounter counter))
