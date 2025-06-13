@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 853457839753829780}
   m_Layer: 0
-  m_Name: TopPoint
+  m_Name: HoldPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -147,7 +147,7 @@ PrefabInstance:
     - target: {fileID: 2584236346831272850, guid: c574e23c7d91bd64a92400bfaa4207df,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3.75
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2584236346831272850, guid: c574e23c7d91bd64a92400bfaa4207df,
         type: 3}
@@ -157,7 +157,7 @@ PrefabInstance:
     - target: {fileID: 2584236346831272850, guid: c574e23c7d91bd64a92400bfaa4207df,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 5.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2584236346831272850, guid: c574e23c7d91bd64a92400bfaa4207df,
         type: 3}
@@ -238,10 +238,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddfec898da6f39041a2c1031783f3049, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  holdPoint: {fileID: 853457839753829780}
   selectedCounter: {fileID: 3831267491987982153}
-  kitchenObjectPrefab: {fileID: 5479249415257340611, guid: 5ff705b4d55f45a4d89667c312fcdf52,
-    type: 3}
-  topPoint: {fileID: 853457839753829780}
+  kitchenObjectSO: {fileID: 0}
+  testing: 0
+  transferTargetCounter: {fileID: 0}
 --- !u!4 &5047992340683951836 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2584236346831272850, guid: c574e23c7d91bd64a92400bfaa4207df,
