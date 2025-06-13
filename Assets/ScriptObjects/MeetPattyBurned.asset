@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1dd244c451f33d4aba25a3029dc7705, type: 3}
   m_Name: MeetPattyBurned
   m_EditorClassIdentifier: 
-  prefab: {fileID: 0}
+  prefab: {fileID: 5479249415257340611, guid: 181aae7a0b1bebc4cb6235f6a488211e, type: 3}
   sprite: {fileID: 21300000, guid: 713ea9afa60dd6e4ebf6503a33e8cc99, type: 3}
   objectName: "\u7126\u8089"

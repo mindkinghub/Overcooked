@@ -5,8 +5,6 @@ using UnityEngine;
 
 public class ClearCounter : BaseCounter
 {
-    [SerializeField] private KitchenObjectSO kitchenObjectSO;
-
     // 以下代码用于测试食材转移
     //[SerializeField] private bool testing = false;
     //[SerializeField] private ClearCounter transferTargetCounter;
@@ -20,16 +18,16 @@ public class ClearCounter : BaseCounter
 
     public override void Interact(Player player)
     {
-        if (GetKitchenObject() == null)
-        {
-            KitchenObject kitchenObject = GameObject.Instantiate(kitchenObjectSO.prefab, GetHoldPoint()).GetComponent<KitchenObject>();
-            SetKitchenObject(kitchenObject);
+        if (player.IsHaveKitchenObject())
+        {// 手上有食材
+            if (IsHaveKitchenObject()) return;
+            TransferKitchenObject(player, this);
         }
         else
-        {
+        {// 手上无食材
+            if (IsHaveKitchenObject() == false) return;
             TransferKitchenObject(this, player);
         }
-
-    }                                                     
+    }
 
 }

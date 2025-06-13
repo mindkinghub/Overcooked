@@ -20,6 +20,10 @@ public class KitchenObjectHolder : MonoBehaviour
     {
         return holdPoint;
     }
+    public bool IsHaveKitchenObject()
+    {
+        return kitchenObject != null;
+    }
 
     public void TransferKitchenObject(KitchenObjectHolder soureHolder, KitchenObjectHolder targetHolder)
     {
