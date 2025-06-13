@@ -8,9 +8,9 @@ public class Player : MonoBehaviour
     [SerializeField] private float moveSpeed = 7;
     [SerializeField] private float rotateSpeed = 100;
     [SerializeField] private GameInput gameInput;
-    [SerializeField] private LayerMask counterLayerMask;  // Ö¸¶¨Ö»ÓëCounter²ã·¢ÉúÅö×²
+    [SerializeField] private LayerMask counterLayerMask;  // Ö¸ï¿½ï¿½Ö»ï¿½ï¿½Counterï¿½ã·¢ï¿½ï¿½ï¿½ï¿½×²
 
-    private bool isWalking = false;     // ÕýÔÚÐÐ×ß
+    private bool isWalking = false;     // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     private ClearCounter seletedCounter;
 
     private void Start()
@@ -39,7 +39,6 @@ public class Player : MonoBehaviour
 
     private void HandleMovement()
     {
-        // ´¦ÀíÒÆ¶¯Âß¼­
         Vector3 direction = gameInput.GetMovementDirectionNormalized();
 
         isWalking = direction != Vector3.zero;
@@ -53,7 +52,7 @@ public class Player : MonoBehaviour
     }
     private void HandleInteraction()
     {
-        // ´¦Àí½»»¥Âß¼­
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß¼ï¿½
         if (Physics.Raycast(transform.position, transform.forward, out RaycastHit hitinfo, 2f, counterLayerMask))
         {
             if(hitinfo.transform.TryGetComponent<ClearCounter>(out ClearCounter counter))

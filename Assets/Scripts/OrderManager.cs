@@ -1,9 +1,13 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NewBehaviourScript : MonoBehaviour
+public class OrderManager : MonoBehaviour
 {
+    public static OrderManager Instance { get; private set; }
+    public event EventHandler OnRecipeSpawned;
+    public event EventHandler OnRecipeCompleted;
     [SerializeField] private RecipeListSO recipeSOList;
     [SerializeField] private int orderMaxCount = 5;
     [SerializeField] private float orderRate = 2;
@@ -13,6 +17,23 @@ public class NewBehaviourScript : MonoBehaviour
     private float orderTimer = 0;
     private bool isStartOrder = false;
     private int orderCount = 0;
+
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+
+    private void Start()
+    {
+        isStartOrder = true;
+    }
 
     private void Update()
     {
@@ -44,7 +65,7 @@ public class NewBehaviourScript : MonoBehaviour
         if (orderCount >= orderMaxCount) return;
 
         orderCount++;
-        int randomIndex = Random.Range(0, recipeSOList.recipeSOList.Count);
+        int randomIndex = UnityEngine.Random.Range(0, recipeSOList.recipeSOList.Count);
         RecipeSO newRecipe = recipeSOList.recipeSOList[randomIndex];
 
         if (!orderRecipeSOList.Contains(newRecipe))
@@ -52,5 +73,11 @@ public class NewBehaviourScript : MonoBehaviour
             orderRecipeSOList.Add(newRecipe);
             Debug.Log($"New recipe ordered: {newRecipe.name}");
         }
+        OnRecipeSpawned?.Invoke(this, EventArgs.Empty);
+    }
+
+    public List<RecipeSO> GetOrderList()
+    {
+        return orderRecipeSOList;
     }
 }
