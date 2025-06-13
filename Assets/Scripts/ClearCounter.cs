@@ -1,29 +1,39 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class ClearCounter : MonoBehaviour
 {
     [SerializeField] private GameObject selectedCounter;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    [SerializeField] private GameObject kitchenObjectPrefab;
+    [SerializeField] private KitchenObjectSO kitchenObjectSO;
     [SerializeField] private Transform topPoint;
+    [SerializeField] private bool testing = false;
+    [SerializeField] private ClearCounter transferTargetCounter;
+
+    private KitchenObject kitchenObject;
+
+    private void Update()
+    {
+        if(testing && Input.GetMouseButtonDown(0))
+        {
+            TransferKitchenObject(this, transferTargetCounter);
+        }
+    }
 
     public void Interact()
     {
-        GameObject go = GameObject.Instantiate(kitchenObjectPrefab, topPoint);
-        go.transform.localPosition = Vector3.zero;
+        if (kitchenObject == null)
+        {
+            kitchenObject = GameObject.Instantiate(kitchenObjectSO.prefab, topPoint).GetComponent<KitchenObject>();
+            kitchenObject.transform.localPosition = Vector3.zero;
+        }
+        else
+        {
+            Debug.LogWarning("已有食材"+gameObject);
+
+        }
+
     }
     public void SelectCounter()
     {
@@ -34,4 +44,34 @@ public class ClearCounter : MonoBehaviour
         selectedCounter.SetActive(false);
     }
 
+    public KitchenObject GetKitchenObject()
+    {
+        return kitchenObject;
+    }
+
+    public void TransferKitchenObject(ClearCounter soureCounter, ClearCounter targetCounter)
+    {
+        if (soureCounter.GetKitchenObject() == null)
+        {
+            Debug.LogWarning("源柜台无食材");
+            return;
+        }
+        if (targetCounter.GetKitchenObject() != null)
+        {
+            Debug.LogWarning("目标柜台已有食材");
+            return;
+        }
+        targetCounter.AddKitchenObject(soureCounter.GetKitchenObject());
+        soureCounter.ClearKitchenObject();
+    }
+    public void AddKitchenObject(KitchenObject kitchenObject)
+    {
+        kitchenObject.transform.SetParent(topPoint);
+        kitchenObject.transform.localPosition = Vector3.zero;
+        this.kitchenObject = kitchenObject;
+    }
+    public void ClearKitchenObject()
+    {
+        this.kitchenObject = null;
+    }
 }
