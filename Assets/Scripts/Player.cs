@@ -12,7 +12,7 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
     void Update()
     {
@@ -29,7 +29,6 @@ public class Player : MonoBehaviour
     }
     private void HandleMovement()
     {
-        // 处理移动逻辑
         Vector3 direction = gameInput.GetMovementDirectionNormalized();
 
         isWalking = direction != Vector3.zero;
@@ -43,7 +42,6 @@ public class Player : MonoBehaviour
     }
     private void HandleInteraction()
     {
-        // 处理交互逻辑
         RaycastHit hitinfo;
         bool isCollider = Physics.Raycast(transform.position, transform.forward, out hitinfo, 2f);
         if (isCollider)
