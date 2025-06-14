@@ -51,4 +51,14 @@ public class KitchenObjectHolder : MonoBehaviour
         this.kitchenObject = null;
     }
 
+    public void DestroyKitchenObject()
+    {
+        Destroy(kitchenObject.gameObject);
+        ClearKitchenObject();
+    }
+    public void CreateKitchenObject(GameObject kitchenObjectPrefab)
+    {
+        KitchenObject kitchenObject = GameObject.Instantiate(kitchenObjectPrefab, GetHoldPoint()).GetComponent<KitchenObject>();
+        SetKitchenObject(kitchenObject);
+    }
 }

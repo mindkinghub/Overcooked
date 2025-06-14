@@ -7,8 +7,10 @@ public class BaseCounter : KitchenObjectHolder
     [SerializeField] private GameObject selectedCounter;
     public virtual void Interact(Player player)
     {
-        Debug.LogWarning("交互方法还没重写");
+        Debug.LogWarning("浜や簰鏂规硶杩樻病閲嶅啓");
     }
+
+    public virtual void InteractOperate(Player player) { }
 
     public void SelectCounter()
     {
