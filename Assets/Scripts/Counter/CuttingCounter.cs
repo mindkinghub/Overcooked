@@ -1,15 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEditor.Rendering.CameraUI;
 
 public class CuttingCounter : BaseCounter
 {
     [SerializeField] private CuttingRecipeListSO cuttingRecipeList;
+    private int cuttingCount = 0;
     public override void Interact(Player player)
     {
         if (player.IsHaveKitchenObject())
         {// 手上有食材
             if (IsHaveKitchenObject()) return;
+            cuttingCount = 0;
             TransferKitchenObject(player, this);
         }
         else
@@ -23,12 +26,15 @@ public class CuttingCounter : BaseCounter
     {
         if (IsHaveKitchenObject())
         {
-            KitchenObjectSO output = cuttingRecipeList.GetOutput(GetKitchenObject().GetKitchenObjectSO());
-
-            if(output != null)
+            if(cuttingRecipeList.TryGetCuttingRecipe(GetKitchenObject().GetKitchenObjectSO(), 
+                out CuttingRecipe cuttingRecipe))
             {
-                DestroyKitchenObject();
-                CreateKitchenObject(output.prefab);
+                cuttingCount++;
+                if(cuttingCount >= cuttingRecipe.cuttingCountMax)
+                {
+                    DestroyKitchenObject();
+                    CreateKitchenObject(cuttingRecipe.output.prefab);
+                }
             }
         }
     }

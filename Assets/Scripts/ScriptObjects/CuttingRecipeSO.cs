@@ -8,20 +8,23 @@ public class CuttingRecipe
 {
     public KitchenObjectSO input;
     public KitchenObjectSO output;
+    public int cuttingCountMax;
 }
 [CreateAssetMenu()]
 public class CuttingRecipeListSO : ScriptableObject
 {
     public List<CuttingRecipe> list;
-    public KitchenObjectSO GetOutput(KitchenObjectSO input)
+    public bool TryGetCuttingRecipe(KitchenObjectSO input, out CuttingRecipe cuttingRecipe)
     {
-        foreach(CuttingRecipe recipe in list)
+        foreach (CuttingRecipe recipe in list)
         {
-            if(recipe.input == input)
+            if (recipe.input == input)
             {
-                return recipe.output;
+                cuttingRecipe = recipe;
+                return true;
             }
         }
-        return null;
+        cuttingRecipe = null;
+        return false;
     }
 }
