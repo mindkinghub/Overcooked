@@ -80,4 +80,50 @@ public class OrderManager : MonoBehaviour
     {
         return orderRecipeSOList;
     }
+
+    public void DeliveryRecipe(PlateKitchenObject plateKitchenObject)
+    {
+        RecipeSO recipeToComplete = null;
+        foreach (RecipeSO recipe in orderRecipeSOList)
+        {
+            if (IsCorrect(recipe, plateKitchenObject))
+            {
+                recipeToComplete = recipe;
+                break;
+            }
+        }
+
+        if (recipeToComplete == null)
+        {
+            Debug.LogWarning("No matching recipe found for the delivered plate.");
+            return;
+        }
+        else
+        {
+            Debug.Log($"Recipe completed: {recipeToComplete.name}");
+            orderRecipeSOList.Remove(recipeToComplete);
+            OnRecipeCompleted?.Invoke(this, EventArgs.Empty);
+            orderCount--;
+        }
+    }
+
+    private bool IsCorrect(RecipeSO recipe, PlateKitchenObject plateKitchenObject)
+    {
+        List<KitchenObjectSO> list1 = recipe.kitchenObjectSOList;
+        List<KitchenObjectSO> list2 = plateKitchenObject.GetKitchenObjectSOList();
+
+        if (list1.Count != list2.Count)
+        {
+            return false;
+        }
+
+        foreach (KitchenObjectSO kitchenObjectSO in list1)
+        {
+            if (!list2.Contains(kitchenObjectSO))
+            {
+                return false;
+            }
+        }
+        return true;
+    }
 }
