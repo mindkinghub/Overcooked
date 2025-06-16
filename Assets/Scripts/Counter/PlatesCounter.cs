@@ -36,7 +36,7 @@ public class PlatesCounter : BaseCounter
         {// 手上无食材
             if(platesList.Count > 0)
             {
-                player.AddKitchenObject(platesList[platesList.Count -1]);   // 玩家取走最后一个盘子
+                player.AddKitchenObject(platesList[platesList.Count -1]);   // 玩家取走最上面的一个盘子
                 platesList.RemoveAt(platesList.Count - 1);
             }
         }
