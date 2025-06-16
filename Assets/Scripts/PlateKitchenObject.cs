@@ -11,11 +11,16 @@ public class PlateKitchenObject : KitchenObject
 
     public bool AddKitchenObjecctSO(KitchenObjectSO kitchenObjectSO)
     {
-        if (kitchenObjectSOList.Contains(kitchenObjectSO) || 
+        if (kitchenObjectSOList.Contains(kitchenObjectSO) ||
             validkitchenObjectSOList.Contains(kitchenObjectSO) == false)
             return false;
         plateCompleteVisual.ShowKitchenObject(kitchenObjectSO);
         kitchenObjectSOList.Add(kitchenObjectSO);
         return true;
+    }
+
+    public List<KitchenObjectSO> GetKitchenObjectSOList()
+    {
+        return kitchenObjectSOList;
     }
 }

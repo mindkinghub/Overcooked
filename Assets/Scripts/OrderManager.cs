@@ -64,15 +64,13 @@ public class OrderManager : MonoBehaviour
 
         if (orderCount >= orderMaxCount) return;
 
-        orderCount++;
         int randomIndex = UnityEngine.Random.Range(0, recipeSOList.recipeSOList.Count);
         RecipeSO newRecipe = recipeSOList.recipeSOList[randomIndex];
 
-        if (!orderRecipeSOList.Contains(newRecipe))
-        {
-            orderRecipeSOList.Add(newRecipe);
-            Debug.Log($"New recipe ordered: {newRecipe.name}");
-        }
+
+        orderRecipeSOList.Add(newRecipe);
+        orderCount++;
+        Debug.Log($"New recipe ordered: {newRecipe.name}");
         OnRecipeSpawned?.Invoke(this, EventArgs.Empty);
     }
 
