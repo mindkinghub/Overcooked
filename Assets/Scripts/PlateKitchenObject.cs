@@ -6,6 +6,7 @@ public class PlateKitchenObject : KitchenObject
 {
     [SerializeField] private List<KitchenObjectSO> validkitchenObjectSOList = new List<KitchenObjectSO>();
     [SerializeField] private PlateCompleteVisual plateCompleteVisual;
+    [SerializeField] private KitchenObjectGridUI kitchenObjectGridUI;
 
     private List<KitchenObjectSO> kitchenObjectSOList = new List<KitchenObjectSO>();
 
@@ -14,7 +15,9 @@ public class PlateKitchenObject : KitchenObject
         if (kitchenObjectSOList.Contains(kitchenObjectSO) ||
             validkitchenObjectSOList.Contains(kitchenObjectSO) == false)
             return false;
+
         plateCompleteVisual.ShowKitchenObject(kitchenObjectSO);
+        kitchenObjectGridUI.ShowKitchenObjectUI(kitchenObjectSO);
         kitchenObjectSOList.Add(kitchenObjectSO);
         return true;
     }
