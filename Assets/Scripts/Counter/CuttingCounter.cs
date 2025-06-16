@@ -6,6 +6,10 @@ using static UnityEditor.Rendering.CameraUI;
 public class CuttingCounter : BaseCounter
 {
     [SerializeField] private CuttingRecipeListSO cuttingRecipeList;
+
+    [SerializeField] private ProgressBarUI progressBarUI;
+
+    [SerializeField] private CuttingCounterVisual cuttingCounterVisual;
     private int cuttingCount = 0;
     public override void Interact(Player player)
     {
@@ -19,6 +23,7 @@ public class CuttingCounter : BaseCounter
         {// 手上无食材
             if (IsHaveKitchenObject() == false) return;
             TransferKitchenObject(this, player);
+            progressBarUI.Hide();
         }
     }
 
@@ -26,16 +31,24 @@ public class CuttingCounter : BaseCounter
     {
         if (IsHaveKitchenObject())
         {
-            if(cuttingRecipeList.TryGetCuttingRecipe(GetKitchenObject().GetKitchenObjectSO(), 
+            if (cuttingRecipeList.TryGetCuttingRecipe(GetKitchenObject().GetKitchenObjectSO(),
                 out CuttingRecipe cuttingRecipe))
             {
-                cuttingCount++;
-                if(cuttingCount >= cuttingRecipe.cuttingCountMax)
+                Cut();
+
+                progressBarUI.UpdateProgress((float)cuttingCount / cuttingRecipe.cuttingCountMax);
+                if (cuttingCount >= cuttingRecipe.cuttingCountMax)
                 {
                     DestroyKitchenObject();
                     CreateKitchenObject(cuttingRecipe.output.prefab);
                 }
             }
         }
+    }
+
+    public void Cut()
+    {
+        cuttingCount++;
+        cuttingCounterVisual.PlayCut();
     }
 }
