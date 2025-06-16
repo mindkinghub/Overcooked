@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c1dd244c451f33d4aba25a3029dc7705, type: 3}
-  m_Name: MeetPattyCooked
+  m_Name: TomatoSlices
   m_EditorClassIdentifier: 
-  prefab: {fileID: 0}
-  sprite: {fileID: 21300000, guid: f1f50c7ef90b19741b26f2040806cf56, type: 3}
-  objectName: "\u719F\u8089"
+  prefab: {fileID: 3011701351916310332, guid: ab3a9b6896ba2e748b29e386eb792008, type: 3}
+  sprite: {fileID: 21300000, guid: c9f08c3c1ae2a364aaeaa3712540b1d4, type: 3}
+  objectName: "\u897F\u7EA2\u67FF\u7247"

@@ -13,7 +13,7 @@ public class Player : KitchenObjectHolder
     [SerializeField] private LayerMask counterLayerMask;  // 让人物只与Counter层物体发生碰撞
 
     private bool isWalking = false;     // 人物是否在行走
-    private ClearCounter seletedCounter;
+    private BaseCounter seletedCounter;
 
     private void Awake()
     {
@@ -22,6 +22,7 @@ public class Player : KitchenObjectHolder
     private void Start()
     {
         gameInput.OnInteractAction += GameInput_OnInteractAction;
+        gameInput.OnOperateAction += GameInput_OnOperateAction;
     }
 
     void Update()
@@ -43,6 +44,11 @@ public class Player : KitchenObjectHolder
         seletedCounter?.Interact(this);
     }
 
+    private void GameInput_OnOperateAction(object sender, System.EventArgs e)
+    {
+        seletedCounter?.InteractOperate(this);
+    }
+
     private void HandleMovement()
     {
         // 处理移动逻辑
@@ -62,7 +68,7 @@ public class Player : KitchenObjectHolder
         // 处理交互逻辑
         if (Physics.Raycast(transform.position, transform.forward, out RaycastHit hitinfo, 2f, counterLayerMask))
         {
-            if(hitinfo.transform.TryGetComponent<ClearCounter>(out ClearCounter counter))
+            if(hitinfo.transform.TryGetComponent<BaseCounter>(out BaseCounter counter))
             {
                 SetSelectedCounter(counter);
             }
@@ -75,16 +81,16 @@ public class Player : KitchenObjectHolder
         {
             SetSelectedCounter(null);
         }
-
-
     }
-    public void SetSelectedCounter(ClearCounter counter)
+
+    public void SetSelectedCounter(BaseCounter counter)
     {
         if(counter != seletedCounter)
         {
             seletedCounter?.CancelSelect();
             counter?.SelectCounter();
+            this.seletedCounter = counter;
         }
-        this.seletedCounter = counter;
+        
     }
 }

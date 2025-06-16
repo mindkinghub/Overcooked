@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c1dd244c451f33d4aba25a3029dc7705, type: 3}
-  m_Name: Cabbage
+  m_Name: MeetPattyUncooked
   m_EditorClassIdentifier: 
-  prefab: {fileID: 0}
-  sprite: {fileID: 21300000, guid: e1c23b5aded59d84da30738d3267a6c9, type: 3}
-  objectName: "\u5377\u5FC3\u83DC"
+  prefab: {fileID: 5479249415257340611, guid: fa411d1af6b4add46be397dbbc64a7d6, type: 3}
+  sprite: {fileID: 21300000, guid: aa1bacc24dde76e47b2ec0dd4e82385b, type: 3}
+  objectName: "\u751F\u8089"
