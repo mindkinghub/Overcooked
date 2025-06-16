@@ -13,6 +13,7 @@ public class OrderListUI : MonoBehaviour
     {
         recipeUITemplate.gameObject.SetActive(false);
         OrderManager.Instance.OnRecipeSpawned += OrderManager_OnRecipeSpawned;
+        OrderManager.Instance.OnRecipeCompleted += OrderManager_OnRecipeCompleted;
     }
 
     private void OrderManager_OnRecipeCompleted(object sender, System.EventArgs e)

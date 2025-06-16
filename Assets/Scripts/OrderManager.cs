@@ -101,7 +101,6 @@ public class OrderManager : MonoBehaviour
             Debug.Log($"Recipe completed: {recipeToComplete.name}");
             orderRecipeSOList.Remove(recipeToComplete);
             OnRecipeCompleted?.Invoke(this, EventArgs.Empty);
-            orderCount--;
         }
     }
 
