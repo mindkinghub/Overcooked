@@ -30,6 +30,6 @@ public class ClearCounter : BaseCounter
             TransferKitchenObject(this, player);
         }
 
-    }                                                     
+    }
 
 }
