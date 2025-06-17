@@ -17,6 +17,7 @@ public class OrderManager : MonoBehaviour
     private float orderTimer = 0;
     private bool isStartOrder = false;
     private int orderCount = 0;
+    private int sucessfulDeliveryCount = 0;
 
     private void Awake()
     {
@@ -30,16 +31,25 @@ public class OrderManager : MonoBehaviour
         }
     }
 
-    private void Start()
-    {
-        isStartOrder = true;
-    }
-
     private void Update()
     {
         if (isStartOrder)
         {
             OrderUpdate();
+        }
+    }
+
+    private void Start()
+    {
+        GameManager.Instance.OnGameStateChanged += GameManager_OnGameStateChanged;
+    }
+
+    private void GameManager_OnGameStateChanged(object sender, EventArgs e)
+    {
+
+        if (GameManager.Instance.IsGamePlayingState())
+        {
+            StartOrder();
         }
     }
 
@@ -101,6 +111,8 @@ public class OrderManager : MonoBehaviour
             Debug.Log($"Recipe completed: {recipeToComplete.name}");
             orderRecipeSOList.Remove(recipeToComplete);
             OnRecipeCompleted?.Invoke(this, EventArgs.Empty);
+            sucessfulDeliveryCount++;
+            orderCount--;
         }
     }
 
@@ -122,5 +134,15 @@ public class OrderManager : MonoBehaviour
             }
         }
         return true;
+    }
+
+    public void StartOrder()
+    {
+        isStartOrder = true;
+    }
+
+    public int GetSucessfulDeliveryCount()
+    {
+        return sucessfulDeliveryCount;
     }
 }

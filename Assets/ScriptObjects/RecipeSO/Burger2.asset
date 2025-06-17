@@ -15,6 +15,6 @@ MonoBehaviour:
   recipeName: "\u897F\u7EA2\u67FF\u6C49\u5821\u5305"
   kitchenObjectSOList:
   - {fileID: 11400000, guid: e0b5db9b739e19e46b9275bb51e78b9d, type: 2}
-  - {fileID: 11400000, guid: 9681dbdd6a2f5904d9f30814804d93b4, type: 2}
+  - {fileID: 11400000, guid: 3538a52661fa0964585f8400ba21464d, type: 2}
   - {fileID: 11400000, guid: 171f33557303c5c43a8721ab7b93d89d, type: 2}
   - {fileID: 11400000, guid: 35fa0891019ac7e40a00a72a2e9665fd, type: 2}
