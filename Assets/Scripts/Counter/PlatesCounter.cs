@@ -40,5 +40,21 @@ public class PlatesCounter : BaseCounter
                 platesList.RemoveAt(platesList.Count - 1);
             }
         }
+        else
+        {
+            KitchenObject playerKitchenObject = player.GetKitchenObject();
+            if (playerKitchenObject.TryGetComponent<PlateKitchenObject>
+                (out PlateKitchenObject plateKitchenObject) == false)
+            {// 手上是普通食材
+                if(platesList[platesList.Count - 1].GetComponent<PlateKitchenObject>().
+                    AddKitchenObjecctSO(playerKitchenObject.GetKitchenObjectSO()))
+                {// 添加成功
+                    player.DestroyKitchenObject();
+                    player.AddKitchenObject(platesList[platesList.Count - 1]);   // 玩家取走最上面的一个盘子
+                    platesList.RemoveAt(platesList.Count - 1);
+                }
+                
+            }
+        }
     }
 }
