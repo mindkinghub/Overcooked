@@ -11,6 +11,7 @@ public class Player : KitchenObjectHolder
     [SerializeField] private float rotateSpeed = 10;
     [SerializeField] private GameInput gameInput;
     [SerializeField] private LayerMask counterLayerMask;  // 让人物只与Counter层物体发生碰撞
+    [SerializeField] private bool isPlayer1 = true; // 区分玩家1（默认WASD）和玩家2（默认方向键）
 
     private bool isWalking = false;     // 人物是否在行走
     private BaseCounter seletedCounter;
@@ -21,8 +22,11 @@ public class Player : KitchenObjectHolder
     }
     private void Start()
     {
+        gameInput.SetPlayer(isPlayer1);
         gameInput.OnInteractAction += GameInput_OnInteractAction;
         gameInput.OnOperateAction += GameInput_OnOperateAction;
+        gameInput.OnInteractAction2 += GameInput_OnInteractAction2;
+        gameInput.OnOperateAction2 += GameInput_OnOperateAction2;
     }
 
     void Update()
@@ -33,6 +37,7 @@ public class Player : KitchenObjectHolder
     private void FixedUpdate()
     {
         HandleMovement();
+        GetComponent<Rigidbody>().velocity = Vector3.zero;  // 避免碰撞后弹飞人物
     }
     public bool IsWalking
     {
@@ -41,12 +46,21 @@ public class Player : KitchenObjectHolder
 
     private void GameInput_OnInteractAction(object sender, System.EventArgs e)
     {
-        seletedCounter?.Interact(this);
+        if (isPlayer1) seletedCounter?.Interact(this);
     }
 
     private void GameInput_OnOperateAction(object sender, System.EventArgs e)
     {
-        seletedCounter?.InteractOperate(this);
+        if (isPlayer1) seletedCounter?.InteractOperate(this);
+    }
+    private void GameInput_OnInteractAction2(object sender, System.EventArgs e)
+    {
+        if (!isPlayer1) seletedCounter?.Interact(this);
+    }
+
+    private void GameInput_OnOperateAction2(object sender, System.EventArgs e)
+    {
+        if (!isPlayer1) seletedCounter?.InteractOperate(this);
     }
 
     private void HandleMovement()
@@ -54,7 +68,7 @@ public class Player : KitchenObjectHolder
         // 处理移动逻辑
         Vector3 direction = gameInput.GetMovementDirectionNormalized();
 
-        isWalking = direction != Vector3.zero;
+        isWalking = (direction != Vector3.zero);
 
         transform.position += direction * Time.deltaTime * moveSpeed;
         if (direction != Vector3.zero)
@@ -68,7 +82,7 @@ public class Player : KitchenObjectHolder
         // 处理交互逻辑
         if (Physics.Raycast(transform.position, transform.forward, out RaycastHit hitinfo, 2f, counterLayerMask))
         {
-            if(hitinfo.transform.TryGetComponent<BaseCounter>(out BaseCounter counter))
+            if (hitinfo.transform.TryGetComponent<BaseCounter>(out BaseCounter counter))
             {
                 SetSelectedCounter(counter);
             }
@@ -85,12 +99,12 @@ public class Player : KitchenObjectHolder
 
     public void SetSelectedCounter(BaseCounter counter)
     {
-        if(counter != seletedCounter)
+        if (counter != seletedCounter)
         {
             seletedCounter?.CancelSelect();
             counter?.SelectCounter();
             this.seletedCounter = counter;
         }
-        
+
     }
 }

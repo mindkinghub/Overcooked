@@ -37,6 +37,15 @@ public partial class @GameControl: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": true
                 },
                 {
+                    ""name"": ""ArrowKeysMove"",
+                    ""type"": ""Value"",
+                    ""id"": ""2cb51d81-ac22-43f0-bf9a-69a1e0f41985"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
                     ""name"": ""Interact"",
                     ""type"": ""Button"",
                     ""id"": ""cc3f38e4-357f-400c-aa58-4f8f76131558"",
@@ -58,6 +67,24 @@ public partial class @GameControl: IInputActionCollection2, IDisposable
                     ""name"": ""Pause"",
                     ""type"": ""Button"",
                     ""id"": ""38e838c8-289c-4547-a674-0b4eca4c2ab1"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Interact2"",
+                    ""type"": ""Button"",
+                    ""id"": ""cf05fc91-ba05-4ce2-9a70-723383ce8a36"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Operate2"",
+                    ""type"": ""Button"",
+                    ""id"": ""4de2fe0c-b400-4271-b42c-1044218d9e5d"",
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
@@ -152,6 +179,83 @@ public partial class @GameControl: IInputActionCollection2, IDisposable
                     ""action"": ""Pause"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""2D Vector"",
+                    ""id"": ""b178c580-8c9a-426f-97a6-a90b634360dd"",
+                    ""path"": ""2DVector"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ArrowKeysMove"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""6a163743-21f3-4691-a5bf-87e80e39f147"",
+                    ""path"": ""<Keyboard>/upArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ArrowKeysMove"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""40f802ff-7707-4668-90e4-dd3f5f423a5e"",
+                    ""path"": ""<Keyboard>/downArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ArrowKeysMove"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""89165e7c-2397-4915-9e00-944bcaf42979"",
+                    ""path"": ""<Keyboard>/leftArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ArrowKeysMove"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""49e684f0-0229-4371-aa70-5d0a29419f94"",
+                    ""path"": ""<Keyboard>/rightArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ArrowKeysMove"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a13ae099-6dca-48af-afde-3e4663bfca9b"",
+                    ""path"": ""<Keyboard>/comma"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Interact2"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""944c069d-c677-44ec-9907-a6dc22bf9f25"",
+                    ""path"": ""<Keyboard>/period"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Operate2"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -161,9 +265,12 @@ public partial class @GameControl: IInputActionCollection2, IDisposable
         // Player
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
         m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
+        m_Player_ArrowKeysMove = m_Player.FindAction("ArrowKeysMove", throwIfNotFound: true);
         m_Player_Interact = m_Player.FindAction("Interact", throwIfNotFound: true);
         m_Player_Operate = m_Player.FindAction("Operate", throwIfNotFound: true);
         m_Player_Pause = m_Player.FindAction("Pause", throwIfNotFound: true);
+        m_Player_Interact2 = m_Player.FindAction("Interact2", throwIfNotFound: true);
+        m_Player_Operate2 = m_Player.FindAction("Operate2", throwIfNotFound: true);
     }
 
     ~@GameControl()
@@ -231,17 +338,23 @@ public partial class @GameControl: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_Player;
     private List<IPlayerActions> m_PlayerActionsCallbackInterfaces = new List<IPlayerActions>();
     private readonly InputAction m_Player_Move;
+    private readonly InputAction m_Player_ArrowKeysMove;
     private readonly InputAction m_Player_Interact;
     private readonly InputAction m_Player_Operate;
     private readonly InputAction m_Player_Pause;
+    private readonly InputAction m_Player_Interact2;
+    private readonly InputAction m_Player_Operate2;
     public struct PlayerActions
     {
         private @GameControl m_Wrapper;
         public PlayerActions(@GameControl wrapper) { m_Wrapper = wrapper; }
         public InputAction @Move => m_Wrapper.m_Player_Move;
+        public InputAction @ArrowKeysMove => m_Wrapper.m_Player_ArrowKeysMove;
         public InputAction @Interact => m_Wrapper.m_Player_Interact;
         public InputAction @Operate => m_Wrapper.m_Player_Operate;
         public InputAction @Pause => m_Wrapper.m_Player_Pause;
+        public InputAction @Interact2 => m_Wrapper.m_Player_Interact2;
+        public InputAction @Operate2 => m_Wrapper.m_Player_Operate2;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -254,6 +367,9 @@ public partial class @GameControl: IInputActionCollection2, IDisposable
             @Move.started += instance.OnMove;
             @Move.performed += instance.OnMove;
             @Move.canceled += instance.OnMove;
+            @ArrowKeysMove.started += instance.OnArrowKeysMove;
+            @ArrowKeysMove.performed += instance.OnArrowKeysMove;
+            @ArrowKeysMove.canceled += instance.OnArrowKeysMove;
             @Interact.started += instance.OnInteract;
             @Interact.performed += instance.OnInteract;
             @Interact.canceled += instance.OnInteract;
@@ -263,6 +379,12 @@ public partial class @GameControl: IInputActionCollection2, IDisposable
             @Pause.started += instance.OnPause;
             @Pause.performed += instance.OnPause;
             @Pause.canceled += instance.OnPause;
+            @Interact2.started += instance.OnInteract2;
+            @Interact2.performed += instance.OnInteract2;
+            @Interact2.canceled += instance.OnInteract2;
+            @Operate2.started += instance.OnOperate2;
+            @Operate2.performed += instance.OnOperate2;
+            @Operate2.canceled += instance.OnOperate2;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -270,6 +392,9 @@ public partial class @GameControl: IInputActionCollection2, IDisposable
             @Move.started -= instance.OnMove;
             @Move.performed -= instance.OnMove;
             @Move.canceled -= instance.OnMove;
+            @ArrowKeysMove.started -= instance.OnArrowKeysMove;
+            @ArrowKeysMove.performed -= instance.OnArrowKeysMove;
+            @ArrowKeysMove.canceled -= instance.OnArrowKeysMove;
             @Interact.started -= instance.OnInteract;
             @Interact.performed -= instance.OnInteract;
             @Interact.canceled -= instance.OnInteract;
@@ -279,6 +404,12 @@ public partial class @GameControl: IInputActionCollection2, IDisposable
             @Pause.started -= instance.OnPause;
             @Pause.performed -= instance.OnPause;
             @Pause.canceled -= instance.OnPause;
+            @Interact2.started -= instance.OnInteract2;
+            @Interact2.performed -= instance.OnInteract2;
+            @Interact2.canceled -= instance.OnInteract2;
+            @Operate2.started -= instance.OnOperate2;
+            @Operate2.performed -= instance.OnOperate2;
+            @Operate2.canceled -= instance.OnOperate2;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -299,8 +430,11 @@ public partial class @GameControl: IInputActionCollection2, IDisposable
     public interface IPlayerActions
     {
         void OnMove(InputAction.CallbackContext context);
+        void OnArrowKeysMove(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);
         void OnOperate(InputAction.CallbackContext context);
         void OnPause(InputAction.CallbackContext context);
+        void OnInteract2(InputAction.CallbackContext context);
+        void OnOperate2(InputAction.CallbackContext context);
     }
 }

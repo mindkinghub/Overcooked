@@ -18,8 +18,10 @@ public class GameManager : MonoBehaviour
         GameOver
     }
 
-    private Gamestate gamestate;
     [SerializeField] private Player player;
+    [SerializeField] private Player player2;
+
+    private Gamestate gamestate;
     private float waitingToStartTimer = 1;
     private float countDownToStartTimer = 3;
     private float gamePlayTimer = 60;
@@ -34,7 +36,7 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        // Initialize the game state
+        // 初始化游戏状态
         TurnToWaitingToStart();
         GameInput.Instance.OnPauseAction += GameInput_OnPauseAction;
     }
@@ -105,11 +107,13 @@ public class GameManager : MonoBehaviour
     private void DisablePlayer()
     {
         player.enabled = false;
+        player2.enabled = false;
     }
 
     private void EnablePlayer()
     {
         player.enabled = true;
+        player2.enabled = true;
     }
 
     public bool IsCountDownState()
