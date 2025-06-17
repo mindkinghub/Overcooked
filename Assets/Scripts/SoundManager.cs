@@ -4,7 +4,14 @@ using UnityEngine;
 
 public class SoundManager : MonoBehaviour
 {
+    public static SoundManager Instance { get; private set; }
     [SerializeField]private AudioClipRefsSO audioClipRefsSO;
+
+    private void Awake()
+    {
+        Instance = this;
+    }
+
     private void Start()
     {
         CuttingCounter.OnCut += CuttingCounter_OnCut;
@@ -32,11 +39,15 @@ public class SoundManager : MonoBehaviour
     {
         PlaySound(audioClipRefsSO.chop);
     }
-    private void PlaySound(AudioClip[] clips, float volume = 1.0f)
+    public void PlayStepSound(float volume=.5f)
+    {
+        PlaySound(audioClipRefsSO.footstep,volume);
+    }
+    private void PlaySound(AudioClip[] clips, float volume = .5f)
     {
         PlaySound(clips, Camera.main.transform.position);
     }
-    private void PlaySound(AudioClip[] clips,Vector3 position,float volume =1.0f)
+    private void PlaySound(AudioClip[] clips,Vector3 position,float volume =.5f)
     {
         
 
