@@ -38,6 +38,7 @@ public class GameManager : MonoBehaviour
     {
         // 初始化游戏状态
         TurnToWaitingToStart();
+        SetSingleMode();
         GameInput.Instance.OnPauseAction += GameInput_OnPauseAction;
     }
 
