@@ -24,7 +24,7 @@ public class GameManager : MonoBehaviour
     private Gamestate gamestate;
     private float waitingToStartTimer = 1;
     private float countDownToStartTimer = 3;
-    private float gamePlayTimer = 60;
+    private float gamePlayTimer = 200;
     private float gamePlayingTimeTotal;
     private bool isGamePause=false;
 
@@ -154,5 +154,14 @@ public class GameManager : MonoBehaviour
     public float GetGamePlayingTimerNormalized()
     {
         return gamePlayTimer / gamePlayingTimeTotal;
+    }
+
+    public void SetSingleMode()
+    {
+        player2.gameObject.SetActive(false);
+    }
+    public void SetDoubleMode()
+    {
+        player2.gameObject.SetActive(true);
     }
 }
