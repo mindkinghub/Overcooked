@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,6 +12,7 @@ public class SettingsUI : MonoBehaviour
     [SerializeField] private Button closeButton;
     [SerializeField] private Toggle modeToggle;
     [SerializeField] private GameManager gameManager;
+    [SerializeField] private InputField timeSetInput;
 
     private void Awake()
     {
@@ -32,7 +34,21 @@ public class SettingsUI : MonoBehaviour
             if (isOn)   gameManager.SetDoubleMode();
             else    gameManager.SetSingleMode();
         });
+
+        // 初始化 TimeSet 的值为总游戏时长
+        timeSetInput.text = gameManager.GetGamePlayTimeTotal().ToString();
+        // 限制只能输入数字
+        timeSetInput.contentType = InputField.ContentType.DecimalNumber;
+        // 监听输入变化
+        timeSetInput.onValueChanged.AddListener(OnTimeSetValueChanged);
     }
+
+    private void OnTimeSetValueChanged(string newValue)
+    {
+        if (float.TryParse(newValue, out float time))
+            gameManager.UpdateGamePlayTimer(time);
+    }
+
     public void Show()
     {
         uiParent.SetActive(true);

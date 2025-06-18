@@ -24,14 +24,14 @@ public class GameManager : MonoBehaviour
     private Gamestate gamestate;
     private float waitingToStartTimer = 1;
     private float countDownToStartTimer = 3;
-    private float gamePlayTimer = 200;
-    private float gamePlayingTimeTotal;
+    private float gamePlayTimeTotal = 200;
+    private float gamePlayTimer;
     private bool isGamePause=false;
 
     void Awake()
     {
         Instance = this;
-        gamePlayingTimeTotal = gamePlayTimer;
+        gamePlayTimer = gamePlayTimeTotal;
     }
 
     void Start()
@@ -151,9 +151,18 @@ public class GameManager : MonoBehaviour
     {
         return gamePlayTimer;
     }
+    public float GetGamePlayTimeTotal()
+    {
+        return gamePlayTimeTotal;
+    }
     public float GetGamePlayingTimerNormalized()
     {
-        return gamePlayTimer / gamePlayingTimeTotal;
+        return gamePlayTimer / gamePlayTimeTotal;
+    }
+    public void UpdateGamePlayTimer(float newTime)
+    {
+        gamePlayTimeTotal = newTime;
+        gamePlayTimer = newTime;
     }
 
     public void SetSingleMode()
