@@ -14,6 +14,7 @@ public static class Loader
     private static Scene tagetScene;
     public static void Load(Scene taget)
     {
+        Time.timeScale = 1;
         tagetScene = taget;
         SceneManager.LoadScene((int)Scene.LoadingScene);
     }

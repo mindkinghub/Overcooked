@@ -14,7 +14,7 @@ public class GamePauseUI : MonoBehaviour
     {
         Hide();
         GameManager.Instance.OnGamePaused += GameManager_OnGamePaused;
-        GameManager.Instance.OnGameUnpaused += GameMnager_OnGameUnpaused;
+        GameManager.Instance.OnGameUnpaused += GameManager_OnGameUnpaused;
         resumeButton.onClick.AddListener(() =>
         {
             GameManager.Instance.ToggleGame();
@@ -23,13 +23,13 @@ public class GamePauseUI : MonoBehaviour
         {
             SettingsUI.Instance.Show();
         });
-        //menuButton.onClick.AddListener(() =>
-        //{
-        //    Loader.Load(LoaderOptimization.Scene.GameMenuScene);
-        //});
+        menuButton.onClick.AddListener(() =>
+        {
+            Loader.Load(Loader.Scene.GameMenuScene);
+        });
     }
 
-    private void GameMnager_OnGameUnpaused(object sender, System.EventArgs e)
+    private void GameManager_OnGameUnpaused(object sender, System.EventArgs e)
     {
         Hide();
     }
@@ -47,4 +47,9 @@ public class GamePauseUI : MonoBehaviour
         uiParent.SetActive(false);
     }
 
+    private void OnDestroy()
+    {
+        GameManager.Instance.OnGamePaused -= GameManager_OnGamePaused;
+        GameManager.Instance.OnGameUnpaused -= GameManager_OnGameUnpaused;
+    }
 }
