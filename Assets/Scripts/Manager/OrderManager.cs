@@ -8,6 +8,7 @@ public class OrderManager : MonoBehaviour
     public static OrderManager Instance { get; private set; }
     public event EventHandler OnRecipeSpawned;
     public event EventHandler OnRecipeCompleted;
+    public event EventHandler OnRecipeFailed;
     [SerializeField] private RecipeListSO recipeSOList;
     [SerializeField] private int orderMaxCount = 5;
     [SerializeField] private float orderRate = 2;
@@ -104,6 +105,7 @@ public class OrderManager : MonoBehaviour
         if (recipeToComplete == null)
         {
             Debug.LogWarning("No matching recipe found for the delivered plate.");
+            OnRecipeFailed?.Invoke(this, EventArgs.Empty);
             return;
         }
         else
