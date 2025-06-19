@@ -584,7 +584,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   holdPoint: {fileID: 125202055029398235}
   selectedCounter: {fileID: 7953197217216899999}
-  cuttingRecipeList: {fileID: 11400000, guid: 1b418610ada1f9d4984aa9782ed009c4, type: 2}
+  cuttingRecipeList: {fileID: 11400000, guid: 4385bebf43a6f85469d69b310cf647e2, type: 2}
   progressBarUI: {fileID: 4578576305806533940}
   cuttingCounterVisual: {fileID: 4682546478039726195}
 --- !u!1001 &5903829596163002165
