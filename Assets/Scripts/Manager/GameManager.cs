@@ -131,6 +131,10 @@ public class GameManager : MonoBehaviour
     {
         return gamestate == Gamestate.GameOver;
     }
+    public bool IsWaitingToStartState()
+    {
+        return gamestate == Gamestate.WaitingToStart; 
+    }
     public float GetCountDownToStartTimer()
     {
         return countDownToStartTimer;
