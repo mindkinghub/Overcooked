@@ -10,7 +10,8 @@ public static class Loader
         GameMenuScene,
         LoadingScene,
         GameScene,
-        GameScene2
+        GameScene2,
+        GameScene3
     }
     private static Scene tagetScene;
     public static void Load(Scene taget)

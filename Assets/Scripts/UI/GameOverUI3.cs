@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-public class GameOverUI2 : MonoBehaviour
+public class GameOverUI3 : MonoBehaviour
 {
     [SerializeField] private GameObject uiParent;
     [SerializeField] private TMPro.TextMeshProUGUI gameOverText;
@@ -15,7 +15,7 @@ public class GameOverUI2 : MonoBehaviour
         GameManager.Instance.OnGameStateChanged += GameManager_OnGameStateChanged;
         NextButton.onClick.AddListener(() =>
         {
-            Loader.Load(Loader.Scene.GameScene2);
+            Loader.Load(Loader.Scene.GameScene3);
         });
         BackButton.onClick.AddListener(() =>
         {

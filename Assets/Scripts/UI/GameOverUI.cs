@@ -6,12 +6,16 @@ public class GameOverUI : MonoBehaviour
 {
     [SerializeField] private GameObject uiParent;
     [SerializeField] private TMPro.TextMeshProUGUI gameOverText;
+    [SerializeField] private Button BackButton;
     // Start is called before the first frame update
     void Start()
     {
         Hide();
         GameManager.Instance.OnGameStateChanged += GameManager_OnGameStateChanged;
-        
+        BackButton.onClick.AddListener(() =>
+        {
+            Loader.Load(Loader.Scene.GameMenuScene);
+        });
     }
 
     private void GameManager_OnGameStateChanged(object sender, System.EventArgs e)
