@@ -31,8 +31,16 @@ public class SettingsUI : MonoBehaviour
         // 初始化 Toggle 状态（默认玩家2不启用）
         modeToggle.onValueChanged.AddListener((isOn) =>
         {
-            if (isOn)   gameManager.SetDoubleMode();
-            else    gameManager.SetSingleMode();
+            if (isOn)
+            {
+                PlayerPrefs.SetInt("mode", Convert.ToInt32(isOn));
+                gameManager.SetDoubleMode();
+            }
+            else
+            {
+                PlayerPrefs.SetInt("mode", Convert.ToInt32(isOn));
+                gameManager.SetSingleMode();
+            }
         });
 
         // 初始化 TimeSet 的值为总游戏时长
@@ -46,7 +54,10 @@ public class SettingsUI : MonoBehaviour
     private void OnTimeSetValueChanged(string newValue)
     {
         if (float.TryParse(newValue, out float time))
+        {
             gameManager.UpdateGamePlayTimer(time);
+            PlayerPrefs.SetFloat("gamePlayTimeTotal",time);
+        }
     }
 
     public void Show()

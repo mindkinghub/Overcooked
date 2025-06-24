@@ -1,4 +1,5 @@
 using DG.Tweening;
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -25,6 +26,7 @@ public class SwitchToggle : MonoBehaviour
 
         handlePos = handleRect.anchoredPosition;
         toggle.onValueChanged.AddListener(OnSwitch);
+        toggle.isOn = Convert.ToBoolean(PlayerPrefs.GetInt("mode", 0));
 
         OnSwitch(toggle.isOn);
     }

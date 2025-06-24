@@ -24,9 +24,10 @@ public class GameManager : MonoBehaviour
     private Gamestate gamestate;
     private float waitingToStartTimer = 1;
     private float countDownToStartTimer = 3;
-    private float gamePlayTimeTotal = 200;
+    private float gamePlayTimeTotal;
     private float gamePlayTimer;
     private bool isGamePause=false;
+    private bool isDoubleMode=false;
 
     void Awake()
     {
@@ -38,6 +39,8 @@ public class GameManager : MonoBehaviour
         {
             Instance = this;
         }
+        isDoubleMode = Convert.ToBoolean(PlayerPrefs.GetInt("mode", 0));
+        gamePlayTimeTotal = PlayerPrefs.GetFloat("gamePlayTimeTotal", 200);
         gamePlayTimer = gamePlayTimeTotal;
     }
 
@@ -45,7 +48,10 @@ public class GameManager : MonoBehaviour
     {
         // 初始化游戏状态
         TurnToWaitingToStart();
-        SetSingleMode();
+
+        if (isDoubleMode) SetDoubleMode();
+        else SetSingleMode();
+
         GameInput.Instance.OnPauseAction += GameInput_OnPauseAction;
     }
 
