@@ -51,7 +51,7 @@ public class SettingsUI : MonoBehaviour
         timeSetInput.onValueChanged.AddListener(OnTimeSetValueChanged);
     }
 
-    protected void OnTimeSetValueChanged(string newValue)
+    private void OnTimeSetValueChanged(string newValue)
     {
         if (float.TryParse(newValue, out float time))
         {

@@ -5,9 +5,10 @@ using UnityEngine.UI;
 public class GameOverUI2 : MonoBehaviour
 {
     [SerializeField] private GameObject uiParent;
-    [SerializeField] private TMPro.TextMeshProUGUI gameOverText;
+    [SerializeField] private TMPro.TextMeshProUGUI numberText;
     [SerializeField] private Button NextButton;
     [SerializeField] private Button BackButton;
+    private int score;
     // Start is called before the first frame update
     void Start()
     {
@@ -15,7 +16,7 @@ public class GameOverUI2 : MonoBehaviour
         GameManager.Instance.OnGameStateChanged += GameManager_OnGameStateChanged;
         NextButton.onClick.AddListener(() =>
         {
-            Loader.Load(Loader.Scene.GameScene2);
+            Loader.Load(Loader.Scene.GameScene3);
         });
         BackButton.onClick.AddListener(() =>
         {
@@ -43,7 +44,9 @@ public class GameOverUI2 : MonoBehaviour
 
     private void Show()
     {
-        gameOverText.text = OrderManager.Instance.GetSucessfulDeliveryCount().ToString();
+        score = OrderManager.Instance.GetSucessfulDeliveryCount();
+        PlayerPrefs.SetInt("score2", score);
+        numberText.text = score.ToString();
         uiParent.SetActive(true);
     }
 

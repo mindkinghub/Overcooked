@@ -35,4 +35,11 @@ public class SettingsUI2 : SettingsUI
         // 监听输入变化
         timeSetInput.onValueChanged.AddListener(OnTimeSetValueChanged);
     }
+    private void OnTimeSetValueChanged(string newValue)
+    {
+        if (float.TryParse(newValue, out float time))
+        {
+            PlayerPrefs.SetFloat("gamePlayTimeTotal", time);
+        }
+    }
 }
