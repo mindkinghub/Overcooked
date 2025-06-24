@@ -8,11 +8,11 @@ public class SettingsUI : MonoBehaviour
 {
     public static SettingsUI Instance { get; private set; }
 
-    [SerializeField] private GameObject uiParent;
-    [SerializeField] private Button closeButton;
-    [SerializeField] private Toggle modeToggle;
+    [SerializeField] protected GameObject uiParent;
+    [SerializeField] protected Button closeButton;
+    [SerializeField] protected Toggle modeToggle;
     [SerializeField] private GameManager gameManager;
-    [SerializeField] private InputField timeSetInput;
+    [SerializeField] protected InputField timeSetInput;
 
     private void Awake()
     {
@@ -51,7 +51,7 @@ public class SettingsUI : MonoBehaviour
         timeSetInput.onValueChanged.AddListener(OnTimeSetValueChanged);
     }
 
-    private void OnTimeSetValueChanged(string newValue)
+    protected void OnTimeSetValueChanged(string newValue)
     {
         if (float.TryParse(newValue, out float time))
         {
@@ -64,7 +64,7 @@ public class SettingsUI : MonoBehaviour
     {
         uiParent.SetActive(true);
     }
-    private void Hide()
+    protected void Hide()
     {
         uiParent.SetActive(false);
     }

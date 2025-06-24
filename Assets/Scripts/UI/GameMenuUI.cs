@@ -7,7 +7,7 @@ public class GameMenuUI : MonoBehaviour
 {
     [SerializeField]private Button startButton;
     [SerializeField]private Button quitButton;
-
+    [SerializeField] private Button SettingButton;
     // Start is called before the first frame update
     void Start()
     {
@@ -19,7 +19,12 @@ public class GameMenuUI : MonoBehaviour
         {
             Application.Quit();
         });
-       
+        SettingButton.onClick.AddListener(() =>
+        {
+            SettingsUI.Instance.Show();
+        });
+
+
     }
 
     // Update is called once per frame
