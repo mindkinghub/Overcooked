@@ -7293,7 +7293,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04c127d17fe337f43bb785a0ae58e953, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  recipeSOList: {fileID: 11400000, guid: 088d0beaf25a11741b656a7723f0f474, type: 2}
+  recipeSOList: {fileID: 11400000, guid: b3eced032d9fe2e47b95cd8873a02818, type: 2}
   orderMaxCount: 5
   orderRate: 2
 --- !u!4 &1166147795

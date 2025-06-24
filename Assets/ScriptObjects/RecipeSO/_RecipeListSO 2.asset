@@ -10,13 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 54c962e4ce60305449f7489ee0c61648, type: 3}
-  m_Name: _RecipeListSO
+  m_Name: _RecipeListSO 2
   m_EditorClassIdentifier: 
   recipeSOList:
   - {fileID: 11400000, guid: 2d9ddc93036b3624eb784ba3c66c91e9, type: 2}
   - {fileID: 11400000, guid: a2ed7b2e8cef53b41baa5721d91b3e83, type: 2}
-  - {fileID: 11400000, guid: 2ee745d9fa9905c45ba96d4673739c49, type: 2}
-  - {fileID: 11400000, guid: 856daa9b339390044bb0bd1fa9f65547, type: 2}
   - {fileID: 11400000, guid: 8b8360079d2fe5142b18ee1f9919dd29, type: 2}
   - {fileID: 11400000, guid: 121dd4b22b1f47d4f9f35e6b4e85696e, type: 2}
   - {fileID: 11400000, guid: 48f7b2f859dca8942842d67261727342, type: 2}
